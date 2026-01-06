@@ -1,5 +1,4 @@
-import type { Config } from 'jest';
-import nextJest from 'next/jest';
+const nextJest = require('next/jest');
 
 const createJestConfig = nextJest({
   // Next.jsアプリのパスを指定
@@ -7,7 +6,7 @@ const createJestConfig = nextJest({
 });
 
 // Jestのカスタム設定を追加
-const config: Config = {
+const config = {
   // テスト環境をjsdomに設定（DOM APIを使用するため）
   testEnvironment: 'jest-environment-jsdom',
   // セットアップファイルのパス
@@ -29,5 +28,5 @@ const config: Config = {
 };
 
 // Next.jsのJest設定とマージ
-export default createJestConfig(config);
+module.exports = createJestConfig(config);
 

@@ -35,7 +35,7 @@ jobs:
 
       # 依存関係のインストール
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       # テストの実行
       - name: Run tests
