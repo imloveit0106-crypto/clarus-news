@@ -27,6 +27,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header className="border-b">
+          <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-bold">Clarus</h1>
+          </div>
+        </header>
         {children}
       </body>
     </html>

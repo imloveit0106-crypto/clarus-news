@@ -1,0 +1,47 @@
+name: CI
+
+# ワークフローのトリガー設定
+on:
+  # mainブランチへのpush時に実行
+  push:
+    branches:
+      - main
+  # pull_request時に実行
+  pull_request:
+    branches:
+      - main
+
+# ジョブの定義
+jobs:
+  test:
+    name: Test and Build
+    # 実行環境を指定
+    runs-on: ubuntu-latest
+
+    # ジョブのステップを定義
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Node.jsのセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Node.jsのバージョンを指定（package.jsonのenginesフィールドから読み取ることも可能）
+          node-version: '20'
+          # npmキャッシュを有効化してビルド時間を短縮
+          cache: 'npm'
+
+      # 依存関係のインストール
+      - name: Install dependencies
+        run: npm ci
+
+      # テストの実行
+      - name: Run tests
+        run: npm run test -- --coverage --watchAll=false
+
+      # ビルドの確認
+      - name: Build
+        run: npm run build
+
